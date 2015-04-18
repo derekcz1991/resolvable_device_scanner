@@ -3,7 +3,7 @@
 void list_help()
 {
   printf("Usage:\n");
-  printf("        test \"port\" <command> [command parameters]\n");
+  printf("        resolvable-scanner \"port\" <command> [command parameters]\n");
   printf("options:\n");
   printf("        -h            Display Help\n");
   printf("        -d            Discover Devices\n");
@@ -12,7 +12,6 @@ void list_help()
   printf("        -p [handle]   Pair Devices\n");
   printf("        -r [handle]   Pair devices and then register to server\n");
   printf("        -s            Scan nearby devices and upload to server\n");
-  printf("        -u            Upload Test\n");
 }
 
 int main(int argc, char *argv[])
@@ -24,8 +23,7 @@ int main(int argc, char *argv[])
   }
   if(strcmp(argv[2], "-d") == 0 || strcmp(argv[2], "-c") == 0
       || strcmp(argv[2], "-q") == 0 || strcmp(argv[2], "-p") == 0
-      || strcmp(argv[2], "-s") == 0 || strcmp(argv[2], "-r") == 0
-      || strcmp(argv[2], "-u") == 0)
+      || strcmp(argv[2], "-s") == 0 || strcmp(argv[2], "-r") == 0)
   {
     // connect devices
     if(strcmp(argv[2], "-c") == 0)
@@ -78,11 +76,6 @@ int main(int argc, char *argv[])
         printf("invalid handle(length != 4)\n");
         return -1;
       }
-    }
-    else if(strcmp(argv[2], "-u") == 0)
-    {
-      char *params = "register/?address=ee&irk=22&irk_level=1";
-      printf("%d\n", process_post(params));
     }
   	fd = init_port(argv[1]);
   	if(fd == -1)
